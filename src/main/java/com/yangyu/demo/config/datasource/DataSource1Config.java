@@ -20,6 +20,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  
 
 /**
+ * @author yangyu
+ * Date 2020-03-23
+ * 
  * 数据源1配置
  */
 @Configuration
@@ -52,7 +55,7 @@ public class DataSource1Config {
 		return builder
 				.dataSource(dataSource)
 				.properties(getProperties())
-				.packages("com.yangyu.demo.repository.source1")
+				.packages("com.yangyu.demo.entity.source1")
                 .persistenceUnit("PersistentUnit1")
 				.build();
 	}

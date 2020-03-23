@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 /**
+ * @author yangyu
+ * Date 2020-03-23
+ * 
  * 多数据原主配置
  */
 @Configuration

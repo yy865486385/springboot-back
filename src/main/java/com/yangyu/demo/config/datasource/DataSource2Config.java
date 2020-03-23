@@ -20,6 +20,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
+ * @author yangyu
+ * Date 2020-03-23
+ * 
  * 数据源2配置
  */
 @Configuration
@@ -50,7 +53,7 @@ public class DataSource2Config {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
 		return builder.dataSource(dataSource)
 				.properties(getProperties())
-				.packages("com.yangyu.demo.repository.source2")
+				.packages("com.yangyu.demo.entity.source2")
 				.persistenceUnit("PersistentUnit2")
 				.build();
 	}
