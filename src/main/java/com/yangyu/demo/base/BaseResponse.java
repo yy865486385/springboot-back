@@ -53,5 +53,35 @@ public class BaseResponse {
         return resultBean;
     }
 
+    public static BaseResponse noAuthorities() {
+        BaseResponse resultBean = new BaseResponse();
+        resultBean.setCode(401);
+        resultBean.setMsg("unauthorized");
+        return resultBean;
+    }
+
+    public static BaseResponse noAuthorities(Object data) {
+        BaseResponse resultBean = new BaseResponse();
+        resultBean.setCode(401);
+        resultBean.setMsg("unauthorized");
+        resultBean.setData(data);
+        return resultBean;
+    }
+
+    public static BaseResponse invalidToken() {
+        BaseResponse resultBean = new BaseResponse();
+        resultBean.setCode(401);
+        resultBean.setMsg("invalid_token");
+        return resultBean;
+    }
+
+    public static BaseResponse invalidToken(Object data) {
+        BaseResponse resultBean = new BaseResponse();
+        resultBean.setCode(401);
+        resultBean.setMsg("invalid_token");
+        resultBean.setData(data);
+        return resultBean;
+    }
+
 
 }

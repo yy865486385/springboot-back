@@ -13,5 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRep extends BaseRep<User,String>{
+
+	User findByLoginName(String username);
     
 }
