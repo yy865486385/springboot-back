@@ -3,6 +3,7 @@ package com.yangyu.demo.base;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -10,8 +11,11 @@ import javax.persistence.MappedSuperclass;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
@@ -25,6 +29,7 @@ import lombok.Data;
  */
 @Data
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
     @Id
@@ -44,8 +49,10 @@ public abstract class BaseEntity {
 
     private Boolean active=true;
 
+    @CreatedBy
     private String createUser;
 
+    @LastModifiedBy
     private String updateUser;
     
 }
