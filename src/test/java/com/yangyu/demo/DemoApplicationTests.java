@@ -4,7 +4,9 @@ import java.util.Collection;
 import java.util.Set;
 
 import com.yangyu.demo.entity.source1.Client;
+import com.yangyu.demo.entity.source1.User;
 import com.yangyu.demo.repository.source1.ClientRep;
+import com.yangyu.demo.repository.source1.UserRep;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +25,8 @@ public class DemoApplicationTests {
 
 	@Autowired
 	private ClientRep clientRep;
+	@Autowired
+	private UserRep userRep;
 
 	@Test
 	public void contextLoads() {
@@ -34,6 +38,15 @@ public class DemoApplicationTests {
 		Client client = clientRep.findById("7C8560DD-D51B-4D0F-9429-6DF5BD84CDFE").get();
 		Collection<GrantedAuthority> x = client.getAuthorities();
 		System.out.println(x);
+	}
+
+	@Test
+	public void addUserTesst() {
+		User user= new User();
+		user.setLoginName("test");
+		user.setName("test");
+		user.setPassword(new BCryptPasswordEncoder().encode("password"));
+		userRep.save(user);
 	}
 
 }

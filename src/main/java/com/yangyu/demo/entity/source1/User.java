@@ -1,48 +1,35 @@
 package com.yangyu.demo.entity.source1;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.yangyu.demo.base.BaseEntity;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author yangyu Date 2020-03-23
- * 
- *         User 用户实体
+ * @author yangyu
+ * Date 2020-03-23
+ * User 用户实体
  */
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "sys_user")
-@Slf4j
 public class User extends BaseEntity implements UserDetails {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
 
     private String loginName;
 

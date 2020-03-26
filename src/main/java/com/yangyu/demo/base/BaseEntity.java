@@ -1,6 +1,7 @@
 package com.yangyu.demo.base;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,12 +24,12 @@ import lombok.Data;
  * 
  */
 @Data
-@GenericGenerator(name="guid",strategy="guid")
 @MappedSuperclass
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(generator = "guid")
+    @GenericGenerator(name="uuid_s",strategy="guid")
+    @GeneratedValue(generator="uuid_s")
     private String id;
 
     @CreatedDate

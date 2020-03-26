@@ -1,10 +1,13 @@
 package com.yangyu.demo.controller;
 
 import com.yangyu.demo.base.BaseResponse;
+import com.yangyu.demo.controller.vo.UserAdd;
 import com.yangyu.demo.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +31,12 @@ public class UserController {
     @ApiOperation(value = "获取所有用户数据")
     public BaseResponse getAllUser() {
         return userService.getAllUser();
+    }
+
+    @PostMapping("")
+    @ApiOperation(value = "新增用户")
+    public BaseResponse addUser(@RequestBody UserAdd user) {
+        return userService.addUser(user);
     }
     
 }

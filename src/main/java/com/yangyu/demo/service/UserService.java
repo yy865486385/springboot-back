@@ -1,11 +1,13 @@
 package com.yangyu.demo.service;
 
 import com.yangyu.demo.base.BaseResponse;
+import com.yangyu.demo.controller.vo.UserAdd;
 import com.yangyu.demo.entity.source1.Role;
 import com.yangyu.demo.entity.source1.User;
 import com.yangyu.demo.repository.source1.UserRep;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +25,24 @@ public class UserService {
     private UserRep userRep;
 
 	public BaseResponse getAllUser() {
-        User user = userRep.findByLoginName("yangyu");
-        for (Role role : user.getRoles()) {
-            log.info(role.getName());
+		return BaseResponse.success(userRep.findAllByProjections());
+	}
+
+	public BaseResponse addUser(UserAdd user) {
+        if (!user.valid()) {
+            return BaseResponse.error("参数不正确");
         }
-		return BaseResponse.success(userRep.findAll());
+        User findUser = userRep.findByLoginName(user.getLoginName());
+        if (findUser!=null) {
+            return BaseResponse.error("登陆名不能重复");
+        }
+        User newUser = new User();
+        newUser.setName(user.getName());
+        newUser.setEnname(user.getEnname());
+        newUser.setLoginName(user.getLoginName());
+        newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        userRep.save(newUser);
+		return BaseResponse.success(user);
 	}
     
 }
