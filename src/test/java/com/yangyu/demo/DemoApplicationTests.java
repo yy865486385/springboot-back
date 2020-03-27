@@ -3,8 +3,10 @@ package com.yangyu.demo;
 import java.util.Collection;
 import java.util.Set;
 
+import com.yangyu.demo.entity.source1.AopLogEntity;
 import com.yangyu.demo.entity.source1.Client;
 import com.yangyu.demo.entity.source1.User;
+import com.yangyu.demo.repository.source1.AopLogRep;
 import com.yangyu.demo.repository.source1.ClientRep;
 import com.yangyu.demo.repository.source1.UserRep;
 
@@ -27,6 +29,8 @@ public class DemoApplicationTests {
 	private ClientRep clientRep;
 	@Autowired
 	private UserRep userRep;
+	@Autowired
+	private AopLogRep aopLogRep;
 
 	@Test
 	public void contextLoads() {
@@ -47,6 +51,14 @@ public class DemoApplicationTests {
 		user.setName("test");
 		user.setPassword(new BCryptPasswordEncoder().encode("password"));
 		userRep.save(user);
+	}
+
+	@Test
+	public void addAopLog() {
+		AopLogEntity aoplog= new AopLogEntity();
+		aoplog.getId();
+		log.info(aoplog.getId());
+		aopLogRep.save(aoplog);
 	}
 
 }

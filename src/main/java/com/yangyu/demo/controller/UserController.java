@@ -1,5 +1,6 @@
 package com.yangyu.demo.controller;
 
+import com.yangyu.demo.aop.AopLog;
 import com.yangyu.demo.base.BaseResponse;
 import com.yangyu.demo.controller.vo.UserAdd;
 import com.yangyu.demo.service.UserService;
@@ -29,12 +30,14 @@ public class UserController {
 
     @GetMapping("")
     @ApiOperation(value = "获取所有用户数据")
+    @AopLog("获取所有用户数据")
     public BaseResponse getAllUser() {
         return userService.getAllUser();
     }
 
     @PostMapping("")
     @ApiOperation(value = "新增用户")
+    @AopLog("新增用户")
     public BaseResponse addUser(@RequestBody UserAdd user) {
         return userService.addUser(user);
     }
