@@ -74,6 +74,7 @@
 			<version>2.6</version>
 		</dependency> -->
 
+		<!-- 去掉dev-tool热部署（使用redis时会导致相同实体转换失败） -->
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
