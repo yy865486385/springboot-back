@@ -11,8 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * @author
- * Date 2020-03-26
- * CustomAuditorAware 定义实体添加和修改时候自动填入操作的用户
+ * @Date 2020-03-26
+ * @desc CustomAuditorAware 定义实体添加和修改时候自动填入操作的用户
  */
 @Configuration
 public class CustomAuditorAware implements AuditorAware<String> {
@@ -22,7 +22,7 @@ public class CustomAuditorAware implements AuditorAware<String> {
         SecurityContext ctx = SecurityContextHolder.getContext();
         User loginUser = (User) ctx.getAuthentication().getPrincipal();
         return Optional.ofNullable(loginUser.getLoginName());
+
     }
 
-    
 }

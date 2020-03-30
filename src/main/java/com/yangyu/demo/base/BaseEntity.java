@@ -1,5 +1,6 @@
 package com.yangyu.demo.base;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ import lombok.Data;
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable{
 
     @Id
     @GenericGenerator(name="uuid_s",strategy="guid")
