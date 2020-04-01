@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 
 /**
  * @author
@@ -20,6 +21,7 @@ public class CustomAuditorAware implements AuditorAware<String> {
     @Override
     public Optional<String> getCurrentAuditor() {
         SecurityContext ctx = SecurityContextHolder.getContext();
+        // System.out.println(((OAuth2AuthenticationDetails)ctx.getAuthentication().getDetails()).getRemoteAddress());
         User loginUser = (User) ctx.getAuthentication().getPrincipal();
         return Optional.ofNullable(loginUser.getLoginName());
 
