@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.sql.DataSource;
 
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.yangyu.demo.config.auditor.AuditMetaObjectHandler;
@@ -39,19 +40,7 @@ public class DataSource1Config {
     @Qualifier("dataSource1")
     private DataSource dataSource1;
 
-    // @Primary
-    // @Bean(name = "sqlSessionFactory1")
-    // public SqlSessionFactoryBean sqlSessionFactoryBean() {
-    // SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-    // sqlSessionFactoryBean.setDataSource(dataSource1);
-    // // 设置entity和数据库字段的映射为下划线形式
-    // org.apache.ibatis.session.Configuration configuration = new
-    // org.apache.ibatis.session.Configuration();
-    // configuration.setMapUnderscoreToCamelCase(true);
-    // sqlSessionFactoryBean.setConfiguration(configuration);
-    // return sqlSessionFactoryBean;
-    // }
-
+    // 使用MybatisSqlSessionFactoryBean，否则无发实现自动填充功能
     @Primary
     @Bean(name = "sqlSessionFactory1")
     public MybatisSqlSessionFactoryBean sqlSessionFactory() {
@@ -70,18 +59,13 @@ public class DataSource1Config {
         return mybatisPlus;
     }
 
-    // 设置实体id生成策略，numberid未配置
+    // 设置实体id生成策略，继承自mybais plus默认的生成器，重写nextUUID以生成带'-'的uuid
     @Component
-    public class CustomIdGenerator implements IdentifierGenerator {
+    public class CustomIdGenerator extends DefaultIdentifierGenerator {
+
         @Override
         public String nextUUID(Object entity) {
             return UUID.randomUUID().toString().toUpperCase();
-        }
-
-        @Override
-        public Number nextId(Object entity) {
-            // TODO Auto-generated method stub
-            return null;
         }
     }
 

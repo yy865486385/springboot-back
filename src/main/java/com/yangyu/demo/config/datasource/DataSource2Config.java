@@ -1,25 +1,30 @@
 package com.yangyu.demo.config.datasource;
 
+import java.util.UUID;
+
 import javax.sql.DataSource;
 
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.yangyu.demo.config.auditor.AuditMetaObjectHandler;
+
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.stereotype.Component;
 
 /**
- * @author yangyu
- * Date 2020-03-23
  * 
  * 数据源2配置
+ * 
+ * @author yangyu
+ * @Date 2020-03-23
+ * 
  */
 @Configuration
 @MapperScan(basePackages = "com.yangyu.demo.dao.source2", sqlSessionTemplateRef = "sqlSessionTemplate2")
@@ -29,34 +34,37 @@ public class DataSource2Config {
     @Qualifier("dataSource2")
     private DataSource dataSource2;
 
+    // 使用MybatisSqlSessionFactoryBean，否则无发实现自动填充功能
     @Bean(name = "sqlSessionFactory2")
-    public SqlSessionFactoryBean sqlSessionFactoryBean() {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource2);
-        return sqlSessionFactoryBean;
+    public MybatisSqlSessionFactoryBean sqlSessionFactory() {
+        MybatisSqlSessionFactoryBean mybatisPlus = new MybatisSqlSessionFactoryBean();
+
+        // 加载数据源
+        mybatisPlus.setDataSource(dataSource2);
+
+        // 全局配置
+        GlobalConfig globalConfig = new GlobalConfig();
+        // 配置填充器
+        globalConfig.setMetaObjectHandler(new AuditMetaObjectHandler());
+        globalConfig.setIdentifierGenerator(new CustomIdGenerator());
+        mybatisPlus.setGlobalConfig(globalConfig);
+
+        return mybatisPlus;
     }
 
-	// @Bean(name = "dataSource2")
-    // @ConfigurationProperties(prefix = "spring.datasource.datasource2")
-    // public DataSource dataSource() {
-    //     return DataSourceBuilder.create().build();
-	// }
-	
-	// @Bean(name = "sqlSessionFactory2")
-    // public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource2") DataSource dataSource) throws Exception {
-    //     SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-    //     bean.setDataSource(dataSource);
-    //     //  bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/db1/*.xml"));
-    //     return bean.getObject();
-	// }
-	
-	// @Bean(name = "transactionManager2")
-    // public DataSourceTransactionManager transactionManager(@Qualifier("datasource2") DataSource dataSource) {
-    //     return new DataSourceTransactionManager(dataSource);
-	// }
-	
-	@Bean(name = "sqlSessionTemplate2")
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactory2") SqlSessionFactory sqlSessionFactory) throws Exception {
+    // 设置实体id生成策略，继承自mybais plus默认的生成器，重写nextUUID以生成带'-'的uuid
+    @Component
+    public class CustomIdGenerator extends DefaultIdentifierGenerator {
+
+        @Override
+        public String nextUUID(Object entity) {
+            return UUID.randomUUID().toString().toUpperCase();
+        }
+    }
+
+    @Bean(name = "sqlSessionTemplate2")
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactory2") SqlSessionFactory sqlSessionFactory)
+            throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

@@ -1,5 +1,7 @@
 package com.yangyu.demo;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import com.yangyu.demo.dao.source1.AopLogDao;
@@ -65,11 +67,13 @@ public class DemoApplicationTests {
 
 	@Test
 	public void addAopLog() {
-		AopLogEntity aoplog = 
-		aopLogDao.selectById("98E42F7D-970E-41FA-B128-AD42EF347B0A");
+		AopLogEntity aoplog = new AopLogEntity();
+		aoplog.setId("98E42F7D-970E-41FA-B128-AD42EF347B0A");
 		aoplog.setActive(false);
-		aopLogDao.update(aoplog, null);
-		log.info(aoplog.toString());
+		aoplog.setDescription("测试");
+		log.info("修改前");
+		aopLogDao.updateById(aoplog);
+		log.info("修改后");
 	}
 
 }
