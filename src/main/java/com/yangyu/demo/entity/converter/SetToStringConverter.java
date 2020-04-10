@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.AttributeConverter;
-
 import org.springframework.util.StringUtils;
 
 /**
@@ -16,9 +14,9 @@ import org.springframework.util.StringUtils;
  * 将Set<String> 转化成字符串入库，按","来区分
  * 
  */
-public class SetToStringConverter implements AttributeConverter<Set<String>, String> {
-    @Override
-    public String convertToDatabaseColumn(Set<String> attribute) {
+public class SetToStringConverter {
+    
+    public static String convertToDatabaseColumn(Set<String> attribute) {
         
         if (attribute == null || attribute.isEmpty()){
             return "";
@@ -29,8 +27,8 @@ public class SetToStringConverter implements AttributeConverter<Set<String>, Str
        return sb.toString();
     }
 
-    @Override
-    public Set<String> convertToEntityAttribute(String dbData) {
+    
+    public static Set<String> convertToEntityAttribute(String dbData) {
         if (StringUtils.isEmpty(dbData)){
             return new HashSet<>();
         }

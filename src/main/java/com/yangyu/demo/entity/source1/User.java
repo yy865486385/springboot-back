@@ -4,13 +4,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.yangyu.demo.base.BaseEntity;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -26,11 +21,11 @@ import lombok.EqualsAndHashCode;
  * User 用户实体
  */
 @Data
-@Entity
+@TableName(value = "sys_user")
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "sys_user")
 public class User extends BaseEntity implements UserDetails {
 
+    @TableField("login_name")
     private String loginName;
 
     private String password;
@@ -39,10 +34,7 @@ public class User extends BaseEntity implements UserDetails {
 
     private String enname;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "sys_user_roles",
-                joinColumns =@JoinColumn(name="user_id"),
-                inverseJoinColumns =@JoinColumn (name="role_id"))
+    @TableField(exist = false)
     private Set<Role> roles = new HashSet<Role>();
 
     @Override
@@ -86,15 +78,4 @@ public class User extends BaseEntity implements UserDetails {
         // TODO Auto-generated method stub
         return true;
     }
-
-    // @Component
-    // public class CustomGrantedAuthority implements GrantedAuthority{
-
-    //     @Override
-    //     public String getAuthority() {
-    //         // TODO Auto-generated method stub
-    //         return null;
-    //     }
-
-    // }
 }

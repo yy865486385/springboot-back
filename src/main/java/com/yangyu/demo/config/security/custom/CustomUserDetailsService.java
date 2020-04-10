@@ -1,7 +1,7 @@
 package com.yangyu.demo.config.security.custom;
 
+import com.yangyu.demo.dao.source1.UserDao;
 import com.yangyu.demo.entity.source1.User;
-import com.yangyu.demo.repository.source1.UserRep;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,11 +19,11 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRep userRep;
+    UserDao userDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRep.findByLoginName(username);
+        User user = userDao.findByLoginName(username);
         if (user == null) {
             throw new UsernameNotFoundException("");
         }

@@ -4,19 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
@@ -29,31 +27,28 @@ import lombok.Data;
  * 
  */
 @Data
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable{
 
-    @Id
-    @GenericGenerator(name="uuid_s",strategy="guid")
-    @GeneratedValue(generator="uuid_s")
+    
+    @TableId(value = "id",type = IdType.ASSIGN_UUID)
     private String id;
 
-    @CreatedDate
+    @TableField(value = "create_date", fill = FieldFill.INSERT)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
-    @LastModifiedDate
+    @TableField(value = "update_date", fill = FieldFill.UPDATE)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
 
     private Boolean active=true;
 
-    @CreatedBy
+    @TableField(value = "create_user", fill = FieldFill.INSERT)
     private String createUser;
 
-    @LastModifiedBy
+    @TableField(value = "update_user", fill = FieldFill.UPDATE)
     private String updateUser;
     
 }

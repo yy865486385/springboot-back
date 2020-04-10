@@ -1,8 +1,6 @@
 package com.yangyu.demo.entity.source1;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.yangyu.demo.base.BaseEntity;
 
 import lombok.Data;
@@ -14,9 +12,8 @@ import lombok.EqualsAndHashCode;
  * AopLog 日志实体
  */
 @Data
-@Entity
-@Table(name = "sys_log")
 @EqualsAndHashCode(callSuper = false)
+@TableName(value = "sys_log")
 public class AopLogEntity extends BaseEntity {
 
     private String description;

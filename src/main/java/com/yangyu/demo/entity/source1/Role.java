@@ -1,8 +1,6 @@
 package com.yangyu.demo.entity.source1;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.yangyu.demo.base.BaseEntity;
 
 import lombok.Data;
@@ -15,8 +13,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Entity
-@Table(name = "sys_role")
+@TableName(value = "sys_role")
 public class Role extends BaseEntity{
 
     private String name;

@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.AttributeConverter;
-
 import org.springframework.util.StringUtils;
 
 /**
@@ -16,8 +14,8 @@ import org.springframework.util.StringUtils;
  * 将List<String> 转化成字符串入库，按","来区分
  * 
  */
-public class ListToStringConverter implements AttributeConverter<List<String>, String> {
-    @Override
+public class ListToStringConverter{
+    
     public String convertToDatabaseColumn(List<String> attribute) {
         
         if (attribute == null || attribute.isEmpty()){
@@ -29,7 +27,6 @@ public class ListToStringConverter implements AttributeConverter<List<String>, S
        return sb.toString();
     }
 
-    @Override
     public List<String> convertToEntityAttribute(String dbData) {
         if (StringUtils.isEmpty(dbData)){
             return new ArrayList<>();

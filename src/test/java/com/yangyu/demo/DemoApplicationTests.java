@@ -1,20 +1,18 @@
 package com.yangyu.demo;
 
-import java.util.Collection;
-import java.util.Set;
+import javax.annotation.Resource;
 
+import com.yangyu.demo.dao.source1.AopLogDao;
+import com.yangyu.demo.dao.source1.ClientDao;
+import com.yangyu.demo.dao.source1.UserDao;
 import com.yangyu.demo.entity.source1.AopLogEntity;
 import com.yangyu.demo.entity.source1.Client;
 import com.yangyu.demo.entity.source1.User;
-import com.yangyu.demo.repository.source1.AopLogRep;
-import com.yangyu.demo.repository.source1.ClientRep;
-import com.yangyu.demo.repository.source1.UserRep;
+import com.yangyu.demo.service.UserService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,12 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DemoApplicationTests {
 
-	@Autowired
-	private ClientRep clientRep;
-	@Autowired
-	private UserRep userRep;
-	@Autowired
-	private AopLogRep aopLogRep;
+	@Resource
+	private ClientDao clientDao;
+	@Resource
+	private UserDao userDao;
+	@Resource
+	private UserService userService;
+	@Resource
+	private AopLogDao aopLogDao;
 
 	@Test
 	public void contextLoads() {
@@ -39,26 +39,37 @@ public class DemoApplicationTests {
 
 	@Test
 	public void clientTest() {
-		Client client = clientRep.findById("7C8560DD-D51B-4D0F-9429-6DF5BD84CDFE").get();
-		Collection<GrantedAuthority> x = client.getAuthorities();
+		Client client = clientDao.findById("7C8560DD-D51B-4D0F-9429-6DF5BD84CDFE");
+		// Collection<GrantedAuthority> x = client.getAuthorities();
+		System.out.println(client);
+	}
+
+	@Test
+	public void getUser() {
+		User x = userDao.findByLoginName("yangyu");
+		// Collection<GrantedAuthority> x = client.getAuthorities();
+		// userService.save(x);
 		System.out.println(x);
 	}
 
 	@Test
 	public void addUserTesst() {
 		User user= new User();
-		user.setLoginName("test");
-		user.setName("test");
+		user.setId("test1");
+		user.setLoginName("test1");
+		user.setName("test1");
+		user.setEnname("test1");
 		user.setPassword(new BCryptPasswordEncoder().encode("password"));
-		userRep.save(user);
+		userDao.insertEntity(user);
 	}
 
 	@Test
 	public void addAopLog() {
-		AopLogEntity aoplog= new AopLogEntity();
-		aoplog.getId();
-		log.info(aoplog.getId());
-		aopLogRep.save(aoplog);
+		AopLogEntity aoplog = 
+		aopLogDao.selectById("98E42F7D-970E-41FA-B128-AD42EF347B0A");
+		aoplog.setActive(false);
+		aopLogDao.update(aoplog, null);
+		log.info(aoplog.toString());
 	}
 
 }
