@@ -1,5 +1,6 @@
 package com.yangyu.demo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -64,11 +65,11 @@ public class DemoApplicationTests {
 	@Test
 	public void addAopLog() {
 		AopLogEntity aoplog = new AopLogEntity();
-		aoplog.setId("98E42F7D-970E-41FA-B128-AD42EF347B0A");
 		aoplog.setActive(false);
 		aoplog.setDescription("测试");
 		log.info("修改前");
-		aopLogMapper.updateById(aoplog);
+		aopLogMapper.insertEntity(aoplog);
+		log.info(aoplog.getId());
 		log.info("修改后");
 	}
 

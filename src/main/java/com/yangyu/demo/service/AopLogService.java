@@ -2,6 +2,7 @@ package com.yangyu.demo.service;
 
 import java.util.UUID;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yangyu.demo.entity.source1.AopLogEntity;
 import com.yangyu.demo.mapper.source1.AopLogMapper;
 
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
  * AopLogService
  */
 @Service
-public class AopLogService {
+public class AopLogService extends ServiceImpl<AopLogMapper,AopLogEntity>{
 
     @Autowired
     private AopLogMapper aopLogMapper;
