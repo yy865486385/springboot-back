@@ -1,4 +1,4 @@
-package com.yangyu.demo.dao.source1;
+package com.yangyu.demo.mapper.source1;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yangyu.demo.entity.source1.AopLogEntity;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Qualifier("sqlSessionTemplate1")
-public interface AopLogDao extends BaseMapper<AopLogEntity>{
+public interface AopLogMapper extends BaseMapper<AopLogEntity>{
 
     @Insert("insert into sys_log(id,active,class_name,description,method_name,args) values(#{id},#{active},#{className},#{description},#{methodName},#{args})")
 	public int insertEntity(AopLogEntity aopLogEntity);

@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yangyu.demo.base.BaseResponse;
 import com.yangyu.demo.controller.vo.UserAdd;
-import com.yangyu.demo.dao.source1.UserDao;
 import com.yangyu.demo.entity.source1.User;
+import com.yangyu.demo.mapper.source1.UserMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,20 +23,20 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
-public class UserService extends ServiceImpl<UserDao,User> {
+public class UserService extends ServiceImpl<UserMapper,User> {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     public BaseResponse getAllUser() {
-        return BaseResponse.success(userDao.selectList(null));
+        return BaseResponse.success(userMapper.selectList(null));
 	}
 
 	public BaseResponse addUser(UserAdd user) {
         if (!user.valid()) {
             return BaseResponse.error("参数不正确");
         }
-        User findUser = userDao.findByLoginName(user.getLoginName());
+        User findUser = userMapper.findByLoginName(user.getLoginName());
         if (findUser!=null) {
             return BaseResponse.error("登陆名不能重复");
         }
@@ -45,7 +45,7 @@ public class UserService extends ServiceImpl<UserDao,User> {
         newUser.setEnname(user.getEnname());
         newUser.setLoginName(user.getLoginName());
         newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        userDao.insert(newUser);
+        userMapper.insert(newUser);
 		return BaseResponse.success(user);
     }
     

@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import com.yangyu.demo.dao.source1.ClientDao;
 import com.yangyu.demo.entity.source1.Client;
+import com.yangyu.demo.mapper.source1.ClientMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,11 +31,11 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomClientDetailsService implements ClientDetailsService {
 
     @Autowired
-    private ClientDao clientDao;
+    private ClientMapper clientMapper;
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        Client client = clientDao.findById(clientId);
+        Client client = clientMapper.findById(clientId);
         if(client==null){
             throw new CustomOAuth2Exception("客户端不存在");
         }

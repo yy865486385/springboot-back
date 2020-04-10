@@ -1,4 +1,4 @@
-package com.yangyu.demo.dao.source1;
+package com.yangyu.demo.mapper.source1;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 @Mapper
 @Qualifier("sqlSessionTemplate1")
-public interface RoleDao extends BaseMapper<Role>{
+public interface RoleMapper extends BaseMapper<Role>{
 
     @Select("select r.id,r.name from sys_role r join sys_user_roles ur on r.id=ur.role_id where ur.user_id=#{userId}")
     @Results({

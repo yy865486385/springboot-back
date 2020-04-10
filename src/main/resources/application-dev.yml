@@ -16,4 +16,4 @@ mybatis-plus:
       capital-mode: true
 logging:
   level:
-    com.yangyu.demo.dao.source1: debug
+    com.yangyu.demo.mapper.source1: debug

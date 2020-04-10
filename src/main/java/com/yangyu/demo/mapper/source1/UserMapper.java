@@ -1,4 +1,4 @@
-package com.yangyu.demo.dao.source1;
+package com.yangyu.demo.mapper.source1;
 
 import java.util.List;
 import java.util.Map;
@@ -18,14 +18,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 /**
+ * UserMapper 用户实体的mapper
+ * 
  * @author yangyu 
+ * 
  * @Date 2020-03-23
  * 
- * @Descriptions UserDao 用户实体的Repository
  */
 @Mapper
 @Qualifier("sqlSessionTemplate1")
-public interface UserDao extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<User> {
 
 	@Select("select * from sys_user where login_name=#{username}")
 	User findByLoginName(String username);
@@ -36,7 +38,7 @@ public interface UserDao extends BaseMapper<User> {
 		@Result(column = "active", property = "active"),
 		@Result(column = "login_name", property = "loginName"),
 		@Result(column = "name", property = "name"),
-		@Result(column="id",property="roles",many = @Many(select = "com.yangyu.demo.dao.source1.RoleDao.findAllByUserId",fetchType = FetchType.DEFAULT))
+		@Result(column="id",property="roles",many = @Many(select = "com.yangyu.demo.mapper.source1.RoleMapper.findAllByUserId",fetchType = FetchType.DEFAULT))
 	})
 	List<User> findAll();
 

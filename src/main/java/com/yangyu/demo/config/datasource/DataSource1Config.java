@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Configuration
-@MapperScan(basePackages = "com.yangyu.demo.dao.source1", sqlSessionTemplateRef = "sqlSessionTemplate1")
+@MapperScan(basePackages = "com.yangyu.demo.mapper.source1", sqlSessionTemplateRef = "sqlSessionTemplate1")
 public class DataSource1Config {
 
     @Autowired

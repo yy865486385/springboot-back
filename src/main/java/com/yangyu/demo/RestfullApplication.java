@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
 
 @SpringBootApplication
 // @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
-@MapperScan(basePackages = "com.yangyu.demo.dao.source1")
 public class RestfullApplication {
 
 	public static void main(String[] args) {

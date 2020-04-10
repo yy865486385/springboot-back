@@ -4,12 +4,12 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import com.yangyu.demo.dao.source1.AopLogDao;
-import com.yangyu.demo.dao.source1.ClientDao;
-import com.yangyu.demo.dao.source1.UserDao;
 import com.yangyu.demo.entity.source1.AopLogEntity;
 import com.yangyu.demo.entity.source1.Client;
 import com.yangyu.demo.entity.source1.User;
+import com.yangyu.demo.mapper.source1.AopLogMapper;
+import com.yangyu.demo.mapper.source1.ClientMapper;
+import com.yangyu.demo.mapper.source1.UserMapper;
 import com.yangyu.demo.service.UserService;
 
 import org.junit.Test;
@@ -26,13 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 public class DemoApplicationTests {
 
 	@Resource
-	private ClientDao clientDao;
+	private ClientMapper clientMapper;
 	@Resource
-	private UserDao userDao;
+	private UserMapper userMapper;
 	@Resource
 	private UserService userService;
 	@Resource
-	private AopLogDao aopLogDao;
+	private AopLogMapper aopLogMapper;
 
 	@Test
 	public void contextLoads() {
@@ -41,28 +41,24 @@ public class DemoApplicationTests {
 
 	@Test
 	public void clientTest() {
-		Client client = clientDao.findById("7C8560DD-D51B-4D0F-9429-6DF5BD84CDFE");
-		// Collection<GrantedAuthority> x = client.getAuthorities();
+		Client client = clientMapper.findById("7C8560DD-D51B-4D0F-9429-6DF5BD84CDFE");
 		System.out.println(client);
 	}
 
 	@Test
 	public void getUser() {
-		User x = userDao.findByLoginName("yangyu");
-		// Collection<GrantedAuthority> x = client.getAuthorities();
-		// userService.save(x);
+		User x = userMapper.findByLoginName("yangyu");
 		System.out.println(x);
 	}
 
 	@Test
 	public void addUserTesst() {
 		User user= new User();
-		user.setId("test1");
 		user.setLoginName("test1");
 		user.setName("test1");
 		user.setEnname("test1");
 		user.setPassword(new BCryptPasswordEncoder().encode("password"));
-		userDao.insertEntity(user);
+		userMapper.insertEntity(user);
 	}
 
 	@Test
@@ -72,7 +68,7 @@ public class DemoApplicationTests {
 		aoplog.setActive(false);
 		aoplog.setDescription("测试");
 		log.info("修改前");
-		aopLogDao.updateById(aoplog);
+		aopLogMapper.updateById(aoplog);
 		log.info("修改后");
 	}
 

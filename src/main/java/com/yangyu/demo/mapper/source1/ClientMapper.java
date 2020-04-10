@@ -1,4 +1,4 @@
-package com.yangyu.demo.dao.source1;
+package com.yangyu.demo.mapper.source1;
 
 import java.util.Optional;
 import java.util.Set;
@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  */
 @Mapper
 @Qualifier("sqlSessionTemplate1")
-public interface ClientDao extends BaseMapper<Client>{
+public interface ClientMapper extends BaseMapper<Client>{
 
     @Select("select * from sys_client where id = #{clientId}")
     // @Results(id = "clientMap",value = {
