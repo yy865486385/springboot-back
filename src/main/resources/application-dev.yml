@@ -10,10 +10,6 @@ spring:
             username: sa
             password: henlius@k905
             driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-mybatis-plus:
-  global-config:
-    db-config:
-      capital-mode: true
 # 显示sql
 # logging:
 #   level:

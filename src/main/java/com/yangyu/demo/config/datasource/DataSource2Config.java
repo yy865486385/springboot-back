@@ -38,17 +38,17 @@ public class DataSource2Config {
     @Bean(name = "sqlSessionFactory2")
     public MybatisSqlSessionFactoryBean sqlSessionFactory() {
         MybatisSqlSessionFactoryBean mybatisPlus = new MybatisSqlSessionFactoryBean();
-
         // 加载数据源
         mybatisPlus.setDataSource(dataSource2);
-
         // 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
         // 配置填充器
         globalConfig.setMetaObjectHandler(new AuditMetaObjectHandler());
+        // id生成策略
         globalConfig.setIdentifierGenerator(new CustomIdGenerator());
         mybatisPlus.setGlobalConfig(globalConfig);
-
+        // TypeHanders
+        mybatisPlus.setTypeHandlersPackage("com.yangyu.demo.entity.typehandlers");
         return mybatisPlus;
     }
 

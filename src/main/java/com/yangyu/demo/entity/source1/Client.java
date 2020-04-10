@@ -2,8 +2,10 @@ package com.yangyu.demo.entity.source1;
 
 import java.util.Set;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.yangyu.demo.base.BaseEntity;
+import com.yangyu.demo.entity.typehandlers.SetToStringTypeHandler;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,93 +32,18 @@ public class Client extends BaseEntity{
     
     private Boolean autoApprove;
 
+    @TableField(typeHandler = SetToStringTypeHandler.class)
     private Set<String> scope;
 
+    @TableField(typeHandler = SetToStringTypeHandler.class)
     private Set<String> authorizedGrantTypes;
 
+    @TableField(typeHandler = SetToStringTypeHandler.class)
     private Set<String> registeredRedirectUri;
 
+    @TableField(typeHandler = SetToStringTypeHandler.class)
     private Set<String> resourceIds;
 
+    @TableField(typeHandler = SetToStringTypeHandler.class)
     private Set<String> authorities;
-
-
-    // @Override
-    // public boolean isSecretRequired() {
-    //     return this.secretRequired;
-    // }
-
-    // @Override
-    // public boolean isScoped() {
-    //     return this.scoped;
-    // }
-
-    // @Override
-    // public boolean isAutoApprove(String scope) {
-    //     return this.autoApprove;
-    // }
-
-    // @Override
-    // public Map<String, Object> getAdditionalInformation() {
-    //     Map<String,Object> additionalInformation = new HashMap<>();
-    //     additionalInformation.put("description", this.description);
-    //     return additionalInformation;
-    // }
-
-    // @Override
-    // public String getClientId() {
-    //     return this.getId();
-    // }
-
-    // @Override
-    // public Collection<GrantedAuthority> getAuthorities() {
-    //     Set<GrantedAuthority> authorities = new HashSet<>();
-    //     for (String authority : this.authorities) {
-    //         SimpleGrantedAuthority sga = new SimpleGrantedAuthority(authority);
-    //         authorities.add(sga);
-    //     }
-    //     return authorities;
-    // }
-
-    // @Override
-    // public Set<String> getResourceIds() {
-    //     // TODO Auto-generated method stub
-    //     return this.resourceIds;
-    // }
-
-    // @Override
-    // public String getClientSecret() {
-    //     // TODO Auto-generated method stub
-    //     return this.clientSecret;
-    // }
-
-    // @Override
-    // public Set<String> getScope() {
-    //     // TODO Auto-generated method stub
-    //     return this.scope;
-    // }
-
-    // @Override
-    // public Set<String> getAuthorizedGrantTypes() {
-    //     // TODO Auto-generated method stub
-    //     return this.authorizedGrantTypes;
-    // }
-
-    // @Override
-    // public Set<String> getRegisteredRedirectUri() {
-    //     // TODO Auto-generated method stub
-    //     return this.registeredRedirectUri;
-    // }
-
-    // @Override
-    // public Integer getAccessTokenValiditySeconds() {
-    //     // TODO Auto-generated method stub
-    //     return this.accessTokenValiditySeconds;
-    // }
-
-    // @Override
-    // public Integer getRefreshTokenValiditySeconds() {
-    //     // TODO Auto-generated method stub
-    //     return this.refreshTokenValiditySeconds;
-    // }
 }

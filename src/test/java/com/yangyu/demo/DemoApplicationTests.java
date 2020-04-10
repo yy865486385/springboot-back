@@ -1,8 +1,5 @@
 package com.yangyu.demo;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import com.yangyu.demo.entity.source1.AopLogEntity;
@@ -43,7 +40,8 @@ public class DemoApplicationTests {
 	@Test
 	public void clientTest() {
 		Client client = clientMapper.findById("7C8560DD-D51B-4D0F-9429-6DF5BD84CDFE");
-		System.out.println(client);
+		System.out.println("------------------------------");
+		log.info(client.toString());
 	}
 
 	@Test
