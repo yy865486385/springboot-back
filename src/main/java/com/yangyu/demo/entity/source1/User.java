@@ -40,9 +40,7 @@ public class User extends BaseEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        for (Role role : this.roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+        roles.stream().map(p->p.getName()).forEach(name->authorities.add(new SimpleGrantedAuthority(name)));
         return authorities;
     }
 
@@ -54,28 +52,24 @@ public class User extends BaseEntity implements UserDetails {
     // 帐户是否过期
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     // 帐户是否被冻结
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     // 帐户密码是否过期，一般有的密码要求性高的系统会使用到，比较每隔一段时间就要求用户重置密码
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     // 帐号是否可用
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
         return true;
     }
 }

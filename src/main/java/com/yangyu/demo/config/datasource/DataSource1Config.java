@@ -1,28 +1,22 @@
 package com.yangyu.demo.config.datasource;
 
-import java.io.IOException;
 import java.util.UUID;
 
 import javax.sql.DataSource;
 
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
-import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.yangyu.demo.config.auditor.AuditMetaObjectHandler;
 
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 
 /**
@@ -68,13 +62,6 @@ public class DataSource1Config {
             return UUID.randomUUID().toString().toUpperCase();
         }
     }
-
-    // @Bean(name = "transactionManager1")
-    // @Primary
-    // public DataSourceTransactionManager
-    // transactionManager(@Qualifier("datasource1") DataSource dataSource) {
-    // return new DataSourceTransactionManager(dataSource);
-    // }
 
     @Bean(name = "sqlSessionTemplate1")
     @Primary

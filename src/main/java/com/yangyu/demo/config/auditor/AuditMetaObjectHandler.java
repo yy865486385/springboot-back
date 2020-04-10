@@ -28,7 +28,7 @@ public class AuditMetaObjectHandler implements MetaObjectHandler {
             User loginUser = (User) ctx.getAuthentication().getPrincipal();
             createUser = loginUser.getLoginName();
         } catch (NullPointerException e) {
-            // throw new NoAuthenticationException("没有操作用户信息，无法新增");
+            throw new NoAuthenticationException("没有操作用户信息，无法新增");
         }
 
         this.strictInsertFill(metaObject, "createUser", String.class, createUser);
@@ -45,7 +45,7 @@ public class AuditMetaObjectHandler implements MetaObjectHandler {
             User loginUser = (User) ctx.getAuthentication().getPrincipal();
             updateUser = loginUser.getLoginName();
         } catch (NullPointerException e) {
-            // throw new NoAuthenticationException("没有操作用户信息，无法修改");
+            throw new NoAuthenticationException("没有操作用户信息，无法修改");
         }
         this.strictUpdateFill(metaObject, "updateUser", String.class, updateUser);
     }

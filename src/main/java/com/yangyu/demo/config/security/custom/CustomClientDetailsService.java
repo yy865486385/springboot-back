@@ -12,13 +12,10 @@ import com.yangyu.demo.mapper.source1.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yangyu
@@ -27,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
  * CustomClientDetailsService 自定义客户端存储，把客户端数据存在数据库中
  */
 @Service
-@Slf4j
 public class CustomClientDetailsService implements ClientDetailsService {
 
     @Autowired

@@ -1,23 +1,12 @@
 package com.yangyu.demo.entity.source1;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.yangyu.demo.base.BaseEntity;
-import com.yangyu.demo.entity.converter.SetToStringConverter;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.provider.ClientDetails;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Client

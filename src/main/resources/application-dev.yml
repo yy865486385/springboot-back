@@ -14,6 +14,7 @@ mybatis-plus:
   global-config:
     db-config:
       capital-mode: true
-logging:
-  level:
-    com.yangyu.demo.mapper.source1: debug
+# 显示sql
+# logging:
+#   level:
+#     com.yangyu.demo.mapper.source1: debug

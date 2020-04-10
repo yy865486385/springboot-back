@@ -15,7 +15,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.FetchType;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 
 /**
  * UserMapper 用户实体的mapper
@@ -30,17 +29,18 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper extends BaseMapper<User> {
 
 	@Select("select * from sys_user where login_name=#{username}")
+	@ResultMap(value="userMain")
 	User findByLoginName(String username);
 
 	@Select("select id,active,login_name,name from sys_user")
-	@Results({
+	@Results(id = "userMain", value =  {
 		@Result(column = "id", property = "id"),
 		@Result(column = "active", property = "active"),
 		@Result(column = "login_name", property = "loginName"),
 		@Result(column = "name", property = "name"),
 		@Result(column="id",property="roles",many = @Many(select = "com.yangyu.demo.mapper.source1.RoleMapper.findAllByUserId",fetchType = FetchType.DEFAULT))
 	})
-	List<User> findAll();
+	List<Map> findAll();
 
 	@Insert("insert into sys_user(id,active,enname,name,password,login_name) values(newid(),1,#{enname},#{name},#{password},#{loginName})")
 	public int insertEntity(User user);

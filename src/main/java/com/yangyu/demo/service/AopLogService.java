@@ -8,6 +8,7 @@ import com.yangyu.demo.mapper.source1.AopLogMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -22,6 +23,7 @@ public class AopLogService extends ServiceImpl<AopLogMapper,AopLogEntity>{
     @Autowired
     private AopLogMapper aopLogMapper;
 
+    @Transactional
     public void write(String description, String className, String methodName, String args ) {
         AopLogEntity aoplog = new AopLogEntity();
         aoplog.setDescription(description);
@@ -29,7 +31,7 @@ public class AopLogService extends ServiceImpl<AopLogMapper,AopLogEntity>{
         aoplog.setMethodName(methodName);
         aoplog.setId(UUID.randomUUID().toString().toUpperCase());
         aoplog.setArgs(args);
-        aopLogMapper.insertEntity(aoplog);
+        aopLogMapper.insert(aoplog);
     }
     
 }

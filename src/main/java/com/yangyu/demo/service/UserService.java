@@ -1,9 +1,5 @@
 package com.yangyu.demo.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yangyu.demo.base.BaseResponse;
 import com.yangyu.demo.controller.vo.UserAdd;
@@ -14,22 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * UserService
  * 
  * @author yangyu Date 2020-03-25
  */
 @Service
-@Slf4j
 public class UserService extends ServiceImpl<UserMapper,User> {
 
     @Autowired
     private UserMapper userMapper;
 
     public BaseResponse getAllUser() {
-        return BaseResponse.success(userMapper.selectList(null));
+        return BaseResponse.success(userMapper.findAll());
 	}
 
 	public BaseResponse addUser(UserAdd user) {

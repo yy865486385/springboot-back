@@ -1,17 +1,10 @@
 package com.yangyu.demo.mapper.source1;
 
-import java.util.Optional;
-import java.util.Set;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yangyu.demo.entity.source1.Client;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.type.JdbcType;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**

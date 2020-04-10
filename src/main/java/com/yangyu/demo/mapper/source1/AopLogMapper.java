@@ -6,7 +6,6 @@ import com.yangyu.demo.entity.source1.AopLogEntity;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author yangyu

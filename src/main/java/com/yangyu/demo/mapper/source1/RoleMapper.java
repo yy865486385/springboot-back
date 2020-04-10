@@ -21,5 +21,5 @@ public interface RoleMapper extends BaseMapper<Role>{
 		@Result(column = "id", property = "id"),
 		@Result(column = "name", property = "name")
 	})
-    List<Role> findAllByUserId(String userId);
+    List<Map> findAllByUserId(String userId);
 }
