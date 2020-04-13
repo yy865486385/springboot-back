@@ -14,6 +14,7 @@ public class CustomTokenStore implements TokenStore {
 
     @Override
     public OAuth2Authentication readAuthentication(OAuth2AccessToken token) {
+        token.getValue();
         // TODO Auto-generated method stub
         return null;
     }
@@ -89,6 +90,4 @@ public class CustomTokenStore implements TokenStore {
         // TODO Auto-generated method stub
         return null;
     }
-
-    
 }

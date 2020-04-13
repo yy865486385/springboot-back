@@ -29,7 +29,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 public interface UserMapper extends BaseMapper<User> {
 
 	@Select("select * from sys_user where login_name=#{username}")
-	@ResultMap(value="userMain")
 	User findByLoginName(String username);
 
 	@Select("select id,active,login_name,name from sys_user")
